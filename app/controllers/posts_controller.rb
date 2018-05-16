@@ -4,16 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    # binding.pry
     @posts = Post.all
-    puts "This is line 1"
-    puts "This is line 2"
-    puts "This is line 3"
-    puts "This is line 4"
-    puts "This is line 5"
-    puts "This is line 6"
-    puts "This is line 7"
-    @my_name = "Anand Soni"
   end
 
   # GET /posts/1
@@ -35,7 +26,8 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     respond_to do |format|
-      if @post.save
+      byebug      
+      if @post.save #false
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
@@ -77,6 +69,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :text)
+      # params.require(:post).permit(:title, :text)
     end
 end
