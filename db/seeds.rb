@@ -4,6 +4,7 @@
 
 #users = User.create([{name: 'user1@example.com' },{ name: 'User1'},{ mobile: '123'}])
 
+
 user_list = [
   [ "user1@example.com", "User1", 123 ],
   [ "user2@example.com", "User2", 123 ],
@@ -11,8 +12,10 @@ user_list = [
 ]
 
 user_list.each do |email, name, mobile|
-  User.create( email: email, name: name, mobile: mobile )
+users =  User.create( email: email, name: name, mobile: mobile )
 end
+
+Post.create(name: "title",text: "text", user_id: User.find_by_user_id)
 # Examples:
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
