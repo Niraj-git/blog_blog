@@ -1,0 +1,26 @@
+%p#notice
+  = notice
+%p
+  %strong Title:
+  = @post.title
+%p
+  %strong Text:
+  = @post.text
+%h2 comments:
+- @post.comments.each do |comment|
+  %p
+    = comment.text
+  %p
+    = time_ago_in_words comment.created_at
+  %p
+    = link_to "Delete comment", [@post, comment], :method => :delete, :confirm => "are you sure?"
+= form_for [@post, @post.comments.build] do |f|
+  %p
+    = f.text_area :text, :size => '40x10'
+  %p
+    = f.submit "Post comment"
+%p
+  = link_to 'Edit', edit_post_path(@post)
+  |
+  = link_to 'Back', posts_path
+  = link_to 'delete',@post, :method => :delete, :confirm => "are you sure?"
