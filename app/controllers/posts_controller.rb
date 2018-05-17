@@ -5,16 +5,20 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
+    # @users = User.all
+    # @posts = Post.where("user_id = ?", User.first.id)
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
+    # @post = Post.find_by("id = ?", params[:user_id])
   end
 
   # GET /posts/new
   def new
     @post = Post.new
+    @post = Post.new(user_id: 2)
   end
 
   # GET /posts/1/edit
@@ -23,10 +27,10 @@ class PostsController < ApplicationController
 
   # POST /posts
   # POST /posts.json
-  def create
-    @post = Post.new(post_params)
-    respond_to do |format|
-      byebug      
+  def create    
+    @post = Post.new(post_params)    
+    respond_to do |format|      
+      #byebug
       if @post.save #false
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
@@ -69,6 +73,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      # params.require(:post).permit(:title, :text)
+      params.require(:post).permit(:user_id, :title, :text)
     end
 end
